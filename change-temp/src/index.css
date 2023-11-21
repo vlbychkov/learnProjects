@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #333;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  
+}
+
+.root {
+  width: 100%;
+}
+
+.App {
+  display: flex;
+  justify-content: center;
+}
+.blockPanel {
+  margin-top: 250px;
+  width: 15%;
+  height: 15%;
+  padding: 10px;
+  background-color: rgb(219, 226, 226);
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+}
+
+
+.blockPanel .blockPanelButton {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 10%;
+}
+
+.blockPanelButton button {
+  width: 100%;
+  height: 35px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+  outline: none;
+  border: 2px solid #837f7f;
+  border-radius: 100em;
+  background-color: #333;
+  color: aliceblue;
+  -webkit-border-radius: 100em;
+  -moz-border-radius: 100em;
+  -ms-border-radius: 100em;
+  -o-border-radius: 100em;
+  font-size: 20px;
+}
+
+.display {
+  display: flex;
+  justify-content: center;
+  height: 60px;
+  padding-bottom: 20px;
+}
+
+.circleDisplayTemp-null {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #23b8c3;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  -ms-border-radius: 100px;
+  -o-border-radius: 100px;
+}
+
+.circleDisplayTemp-venus {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(195, 67, 35);
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  -ms-border-radius: 100px;
+  -o-border-radius: 100px;
+}
+
+.circleDisplayTemp-hot {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(195, 107, 35);
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  -ms-border-radius: 100px;
+  -o-border-radius: 100px;
+}
+
+.circleDisplayTemp-normal {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(166, 195, 35);
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  -ms-border-radius: 100px;
+  -o-border-radius: 100px;
+}
+
+.circleDisplayTemp-easy {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(80, 195, 35);
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  -ms-border-radius: 100px;
+  -o-border-radius: 100px;
+}
+
+.circleDisplayTemp-cool {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2388c3;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  -ms-border-radius: 100px;
+  -o-border-radius: 100px;
+}
+
+.circleDisplayTemp-cold {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(86, 126, 236);
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  -ms-border-radius: 100px;
+  -o-border-radius: 100px;
+}
+
+.circleDisplayTemp-arctic {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(109, 170, 226);
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  -ms-border-radius: 100px;
+  -o-border-radius: 100px;
+}
+.circleDisplayTemp-frozen {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #d6fffa;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  -ms-border-radius: 100px;
+  -o-border-radius: 100px;
+  color: #333;
+}
