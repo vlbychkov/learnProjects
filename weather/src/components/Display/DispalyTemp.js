@@ -11,6 +11,7 @@ class DisplayTemp extends React.Component {
     return (
       <div>
         <div>
+          {/* img вынести */}
           <img
             src={
               'https://openweathermap.org/img/wn/' +

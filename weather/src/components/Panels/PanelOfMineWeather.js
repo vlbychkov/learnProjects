@@ -18,38 +18,39 @@ class PanelOfMineWeather extends React.Component {
         <div>
           <InputCity enterCity={this.props.enterCity} />
           <FaSearchLocation onClick={this.props.searchCity} />
-          <FaRegCompass />
+          <FaRegCompass
+            onClick={() => {
+              this.props.searchCoordUser()
+            }}
+          />
         </div>
         <IsLoadingOrErrorWrapper props={this.props} />
       </div>
     )
   }
 }
-
-const IsLoadingOrErrorWrapper = (state) => {
-  let props = state.props
-  const isLoadingOrError = () => {
-    if (props.messageError) {
-      if (props.messageError === 'city not found') {
-        return <Wrapper text="Ошибка. Такой город не найден. Введите другой." />
-      } else if (props.messageError === 'Nothing to geocode') {
-        return <Wrapper text="Ошибка. Вы не ввели город." />
-      }
-    } else if (props.isLoading) {
-      return <Wrapper text="Loading..." />
-    } else if (Object.entries(props.data).length) {
-      return <DispalyTemp data={props.data} />
-    } else {
-      return (
-        <div>
-          <Wrapper text="Введите город или используйте Геолокацию" />
-          <FaInfoCircle />
-        </div>
-      )
+const isLoadingOrError = (props) => {
+  if (props.messageError) {
+    if (props.messageError === 'city not found') {
+      return <Wrapper text="Ошибка. Такой город не найден. Введите другой." />
+    } else if (props.messageError === 'Nothing to geocode') {
+      return <Wrapper text="Ошибка. Вы не ввели город." />
     }
+  } else if (props.isLoading) {
+    return <Wrapper text="Loading..." />
+  } else if (Object.entries(props.data).length) {
+    return <DispalyTemp data={props.data} />
+  } else {
+    return (
+      <div>
+        <Wrapper text="Введите город или используйте Геолокацию" />
+        <FaInfoCircle />
+      </div>
+    )
   }
-
-  return isLoadingOrError()
+}
+const IsLoadingOrErrorWrapper = (state) => {
+  return isLoadingOrError(state.props)
 }
 
 export default React.memo(PanelOfMineWeather)

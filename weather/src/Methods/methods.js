@@ -10,7 +10,7 @@ async function searchCityMethod(props) {
 }
 
 export const changeFirstLetter = () => {
-  let replacingLastLetter = (string) => {
+  let replacingLastLetterRU = (string) => {
     if (string === 'март' || string === 'август') {
       return string.replace('ь', 'а')
     } else {
@@ -18,7 +18,7 @@ export const changeFirstLetter = () => {
     }
   }
   let upperFirstLetter = (string) => {
-    string = replacingLastLetter(string)
+    string = replacingLastLetterRU(string)
     return string[0].toUpperCase() + string.substring(1)
   }
   let day = new Date()
