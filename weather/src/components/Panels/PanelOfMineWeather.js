@@ -3,21 +3,13 @@ import { FaSearchLocation, FaRegCompass } from 'react-icons/fa'
 import InputCity from '../Input/Input'
 import DispalyTemp from '../Display/DispalyTemp'
 import Wrapper from '../Loading/Wrapper'
+import { FaInfoCircle } from 'react-icons/fa'
 
 class PanelOfMineWeather extends React.Component {
-  isLoadingOrError = () => {
-    if (this.props.messageError) {
-      if (this.props.messageError === 'city not found') {
-        return <Wrapper text="Ошибка. Такой город не найден. Введите другой." />
-      } else if (this.props.messageError === 'Nothing to geocode') {
-        return <Wrapper text="Ошибка. Вы не ввели город." />
-      }
-    } else if (this.props.isLoading) {
-      return <Wrapper text="Loading..." />
-    } else if (Object.entries(this.props.data).length) {
-      return <DispalyTemp data={this.props.data} />
-    } else {
-      return <Wrapper text="Введите город или используйте Геолокацию" />
+  constructor(props) {
+    super(props)
+    this.state = {
+      infoOpen: false,
     }
   }
   render() {
@@ -28,10 +20,36 @@ class PanelOfMineWeather extends React.Component {
           <FaSearchLocation onClick={this.props.searchCity} />
           <FaRegCompass />
         </div>
-        <div>{this.isLoadingOrError()}</div>
+        <IsLoadingOrErrorWrapper props={this.props} />
       </div>
     )
   }
+}
+
+const IsLoadingOrErrorWrapper = (state) => {
+  let props = state.props
+  const isLoadingOrError = () => {
+    if (props.messageError) {
+      if (props.messageError === 'city not found') {
+        return <Wrapper text="Ошибка. Такой город не найден. Введите другой." />
+      } else if (props.messageError === 'Nothing to geocode') {
+        return <Wrapper text="Ошибка. Вы не ввели город." />
+      }
+    } else if (props.isLoading) {
+      return <Wrapper text="Loading..." />
+    } else if (Object.entries(props.data).length) {
+      return <DispalyTemp data={props.data} />
+    } else {
+      return (
+        <div>
+          <Wrapper text="Введите город или используйте Геолокацию" />
+          <FaInfoCircle />
+        </div>
+      )
+    }
+  }
+
+  return isLoadingOrError()
 }
 
 export default React.memo(PanelOfMineWeather)

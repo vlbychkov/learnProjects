@@ -1,4 +1,5 @@
 import React from 'react'
+import { changeFirstLetter } from '../../methods/methods'
 
 class DisplayTemp extends React.Component {
   upperFirstLetter = (string) => {
@@ -7,17 +8,6 @@ class DisplayTemp extends React.Component {
 
   render() {
     let data = this.props.data
-
-    let day = new Date()
-    let days = [
-      'Воскресенье',
-      'Понедельник',
-      'Вторник',
-      'Среда',
-      'Четверг',
-      'Пятница',
-      'Суббота',
-    ]
     return (
       <div>
         <div>
@@ -37,18 +27,13 @@ class DisplayTemp extends React.Component {
             <h1>{data.name}</h1>
             <h3>Влажность: {data.main.humidity}%</h3>
             {/* сделать отдельно */}
-            <p>
-              {days[day.getDay()] +
-                ', ' +
-                this.upperFirstLetter(
-                  day.toLocaleString('default', { month: 'long' }),
-                ) +
-                ' ' +
-                day.getDate()}
-            </p>
+            <p>{changeFirstLetter()}</p>
           </div>
           <div>
-            <p>{this.upperFirstLetter(data.weather[0].description)}</p>
+            <p>
+              {data.weather[0].description[0].toUpperCase() +
+                data.weather[0].description.substring(1)}
+            </p>
           </div>
         </div>
       </div>

@@ -9,4 +9,36 @@ async function searchCityMethod(props) {
   }
 }
 
+export const changeFirstLetter = () => {
+  let replacingLastLetter = (string) => {
+    if (string === 'март' || string === 'август') {
+      return string.replace('ь', 'а')
+    } else {
+      return string.replace('ь', 'я')
+    }
+  }
+  let upperFirstLetter = (string) => {
+    string = replacingLastLetter(string)
+    return string[0].toUpperCase() + string.substring(1)
+  }
+  let day = new Date()
+  let days = [
+    'Воскресенье',
+    'Понедельник',
+    'Вторник',
+    'Среда',
+    'Четверг',
+    'Пятница',
+    'Суббота',
+  ]
+
+  return (
+    days[day.getDay()] +
+    ', ' +
+    day.getDate() +
+    ' ' +
+    upperFirstLetter(day.toLocaleString('default', { month: 'long' }))
+  )
+}
+
 export default searchCityMethod

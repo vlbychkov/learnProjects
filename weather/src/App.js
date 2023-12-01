@@ -2,7 +2,7 @@ import './App.css'
 import React from 'react'
 import Header from './components/Header/Header'
 import PanelOfMineWeather from './components/Panels/PanelOfMineWeather'
-import searchCityMethod from './Methods/methods'
+import searchCityMethod from './methods/methods'
 
 class App extends React.Component {
   constructor(props) {
@@ -10,7 +10,7 @@ class App extends React.Component {
 
     this.state = {
       city: '',
-      dataWeater: {},
+      dataWeather: {},
       error: false,
       isLoading: false,
       messageError: '',
@@ -21,34 +21,41 @@ class App extends React.Component {
     this.enterCity = this.enterCity.bind(this)
   }
 
-  // componentDidMount() {
-  //   navigator.geolocation.getCurrentPosition((position) => {
-  //     this.setState({ isLoading: !this.state.isLoading })
-  //     axios
-  //       .get(process.env.REACT_APP_COORD_URL, {
-  //         params: {
-  //           appid: process.env.REACT_APP_API,
-  //           lat: position.coords.latitude,
-  //           lon: position.coords.longitude,
-  //         },
-  //       })
-  //       .then((res) => {
+  //   navigator.permissions
+  //     .query({ name: 'geolocation' })
+  //     .then((PermissionStatus) => {
+  //       if (
+  //         'granted' === PermissionStatus.state ||
+  //         'prompt' === PermissionStatus.state
+  //       ) {
+  //         navigator.geolocation.getCurrentPosition((position) => {
+  //           this.setState({ isLoading: true })
+
+  //           searchCityMethod({
+  //             url: process.env.REACT_APP_BASE_URL,
+  //             params: {
+  //               appid: process.env.REACT_APP_API,
+  //               lat: position.coords.latitude,
+  //               lon: position.coords.longitude,
+  //             },
+  //           })
+  //             .then((res) => {
+  //               this.setState({
+  //                 city: res.data.name,
+  //                 messageError: '',
+  //               })
+  //               this.state.city && this.searchCity()
+  //             })
+  //             .catch((error) => {
+  //               this.setErrorToState(error.response.data.message)
+  //             })
+  //         })
+  //       } else {
   //         this.setState({
-  //           city: res.data[0].name,
   //           isLoading: false,
-  //           messageError: '',
   //         })
-  //         this.state.city && this.searchCity()
-  //       })
-  //       .catch((error) => {
-  //         this.setState({
-  //           error: true,
-  //           isLoading: !this.state.isLoading,
-  //           messageError: error.response.data.message,
-  //         })
-  //       })
-  //   })
-  // }
+  //       }
+  //     })
 
   enterCity = (inputCityFromUser) => {
     this.setState({
@@ -57,7 +64,7 @@ class App extends React.Component {
   }
 
   searchCity = () => {
-    this.setState({ isLoading: !this.state.isLoading })
+    !this.state.isLoading && this.setState({ isLoading: true })
     searchCityMethod({
       url: process.env.REACT_APP_BASE_URL,
       params: {
@@ -68,18 +75,22 @@ class App extends React.Component {
       },
     }).then((res) => {
       if (res.data === 'error') {
-        this.setState({
-          error: true,
-          isLoading: !this.state.isLoading,
-          messageError: res.message,
-        })
+        this.setErrorToState(res.message)
       } else {
         this.setState({
-          dataWeater: res.data,
-          isLoading: !this.state.isLoading,
+          dataWeather: res.data,
+          isLoading: false,
           messageError: '',
         })
       }
+    })
+  }
+
+  setErrorToState = (message) => {
+    this.setState({
+      error: true,
+      // isLoading: false,
+      messageError: message,
     })
   }
 
@@ -90,7 +101,7 @@ class App extends React.Component {
         <main>
           <Header />
           <PanelOfMineWeather
-            data={state.dataWeater}
+            data={state.dataWeather}
             searchCity={this.searchCity}
             enterCity={this.enterCity}
             isLoading={state.isLoading}
