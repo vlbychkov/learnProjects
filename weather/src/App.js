@@ -25,8 +25,8 @@ class App extends React.Component {
     this.searchCity = this.searchCity.bind(this)
     this.enterCity = this.enterCity.bind(this)
     this.searchCoordUser = this.searchCoordUser.bind(this)
-    this.switchPermissionStatusState =
-      this.switchPermissionStatusState.bind(this)
+    this.wrapperForFetchWeatherWithCoords =
+      this.wrapperForFetchWeatherWithCoords.bind(this)
   }
 
   enterCity = (inputCityFromUser) => {
@@ -46,6 +46,7 @@ class App extends React.Component {
           isLoading: false,
           messageError: '',
           error: false,
+          waitingGeolocationPermissionUser: false,
         })
       }
     })
@@ -56,27 +57,35 @@ class App extends React.Component {
       error: true,
       isLoading: false,
       messageError: message,
+      waitingGeolocationPermissionUser: false,
     })
   }
 
-  wrapperSearchCityMehod = () => {}
+  wrapperForFetchWeatherWithCoords = () => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.setState({ isLoading: true })
+      this.setState({ waitingGeolocationPermissionUser: false })
+
+      searchCityMethod(paramsCoordForFetch(position, this.state))
+        .then((res) => {
+          this.setState({
+            dataWeather: res.data,
+            isLoading: false,
+            messageError: '',
+            error: false,
+            waitingGeolocationPermissionUser: false,
+          })
+        })
+        .catch((error) => {
+          this.setErrorToState(error.response.data.message)
+        })
+    })
+  }
 
   switchPermissionStatusState = (PermissionStatus) => {
     if ('granted' === PermissionStatus.state) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.setState({ isLoading: true })
-        searchCityMethod(paramsCoordForFetch(position, this.state))
-          .then((res) => {
-            this.setState({
-              dataWeather: res.data,
-              isLoading: false,
-              messageError: '',
-            })
-          })
-          .catch((error) => {
-            this.setErrorToState(error.response.data.message)
-          })
-      })
+      this.wrapperForFetchWeatherWithCoords()
+      // сделать реакцию на блокировку разрешения местоположения
     } else {
       this.setState({
         isLoading: false,
@@ -85,16 +94,25 @@ class App extends React.Component {
   }
 
   searchCoordUser = () => {
-    // сделать отдельный granted и decide
     navigator.permissions
       .query({ name: 'geolocation' })
       .then((PermissionStatus) => {
-        if ('prompt' === PermissionStatus.state) {
-          navigator.geolocation.getCurrentPosition(() => {})
-          PermissionStatus.onchange = () => {
-            this.switchPermissionStatusState(PermissionStatus)
-          }
-        } else if ('granted' === PermissionStatus.state) {
+        switch (PermissionStatus.state) {
+          case 'prompt':
+            this.setState({ waitingGeolocationPermissionUser: true })
+            navigator.geolocation.getCurrentPosition(() => {})
+            PermissionStatus.onchange = () => {
+              this.switchPermissionStatusState(PermissionStatus)
+            }
+            break
+          case 'granted':
+            this.wrapperForFetchWeatherWithCoords()
+            break
+          case 'denied':
+            this.setErrorToState('Error with permission geolocation')
+            break
+          default:
+            break
         }
       })
   }
@@ -112,6 +130,9 @@ class App extends React.Component {
             searchCoordUser={this.searchCoordUser}
             isLoading={state.isLoading}
             messageError={state.messageError}
+            waitingGeolocationPermissionUser={
+              state.waitingGeolocationPermissionUser
+            }
           />
         </main>
       </div>
