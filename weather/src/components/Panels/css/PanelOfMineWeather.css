@@ -1,0 +1,27 @@
+.Mine_panel {
+    padding-top: 2em;
+}
+
+.Mine_panel input {
+    background-color: none;
+    border-bottom: 1px solid #fcfcfc;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background: none;
+    outline: none;
+    padding-bottom: 5px;
+    color: #fcfcfc;
+    margin-right: 1em;
+    width: 20em;
+}
+
+.Mine_panel .box_input {
+    display: flex;
+    justify-content: center;
+
+}
+
+.Mine_panel .icon_search_city {
+    margin-right: 0.5em;
+}

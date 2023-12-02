@@ -7,6 +7,7 @@ import {
   paramsCoordForFetch,
   paramsSearchCityForFetch,
 } from './components/Const/const'
+import DisplayHolder from './components/Display/DisplayHolder'
 
 class App extends React.Component {
   constructor(props) {
@@ -122,7 +123,6 @@ class App extends React.Component {
     return (
       <div className="App">
         <main>
-          <Header />
           <PanelOfMineWeather
             data={state.dataWeather}
             searchCity={this.searchCity}
@@ -134,6 +134,10 @@ class App extends React.Component {
               state.waitingGeolocationPermissionUser
             }
           />
+          <div className="Wrapper_block_displays">
+            <Header />
+            <DisplayHolder />
+          </div>
         </main>
       </div>
     )

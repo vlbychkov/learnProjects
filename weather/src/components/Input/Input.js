@@ -1,10 +1,19 @@
 const InputCity = (funcs) => {
   return (
-    <input
-      type="text"
-      placeholder="Search for place"
-      onChange={(ev) => funcs.enterCity(ev.target.value)}
-    />
+    <form
+      onSubmit={(event) => {
+        event.preventDefault()
+        funcs.searchCity()
+      }}
+    >
+      <input
+        type="text"
+        placeholder="Поиск города"
+        onChange={(event) => {
+          funcs.enterCity(event.target.value)
+        }}
+      />
+    </form>
   )
 }
 

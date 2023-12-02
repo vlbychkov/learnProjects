@@ -4,7 +4,7 @@ import InputCity from '../Input/Input'
 import DispalyTemp from '../Display/DispalyTemp'
 import Wrapper from '../Loading/Wrapper'
 import { FaInfoCircle } from 'react-icons/fa'
-
+import './css/PanelOfMineWeather.css'
 class PanelOfMineWeather extends React.Component {
   constructor(props) {
     super(props)
@@ -14,11 +14,19 @@ class PanelOfMineWeather extends React.Component {
   }
   render() {
     return (
-      <div>
-        <div>
-          <InputCity enterCity={this.props.enterCity} />
-          <FaSearchLocation onClick={this.props.searchCity} />
+      <div className="Mine_panel">
+        <div className="Mine_panel box_input">
+          <InputCity
+            enterCity={this.props.enterCity}
+            searchCity={this.props.searchCity}
+          />
+          <FaSearchLocation
+            onClick={this.props.searchCity}
+            size={20}
+            className="Mine_Panel icon_search_city"
+          />
           <FaRegCompass
+            size={20}
             onClick={() => {
               this.props.searchCoordUser()
             }}
@@ -56,7 +64,7 @@ const isLoadingOrError = (props) => {
     return (
       <div>
         <Wrapper text="Введите город или используйте Геолокацию" />
-        <FaInfoCircle />
+        <FaInfoCircle size={20} />
       </div>
     )
   }
