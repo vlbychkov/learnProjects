@@ -2,14 +2,16 @@ import React, { Component } from 'react'
 import './css/displayHolder.css'
 export default class DisplayHolder extends Component {
   render() {
+    console.log(this.props.data.wind)
+
     return (
       <div className="Displays">
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-        <div>4</div>
-        <div>5</div>
-        <div>6</div>
+        <div>{this.props.data.wind?.speed}</div>
+        <div>Humidity</div>
+        <div>temp min and max</div>
+        <div>pressure (* 0.75)</div>
+        <div>sea level</div>
+        <div>map ????</div>
       </div>
     )
   }

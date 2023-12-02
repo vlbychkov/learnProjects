@@ -32,7 +32,7 @@ class App extends React.Component {
 
   enterCity = (inputCityFromUser) => {
     this.setState({
-      city: inputCityFromUser,
+      city: inputCityFromUser.trim(),
     })
   }
 
@@ -136,7 +136,7 @@ class App extends React.Component {
           />
           <div className="Wrapper_block_displays">
             <Header />
-            <DisplayHolder />
+            <DisplayHolder data={state.dataWeather} />
           </div>
         </main>
       </div>

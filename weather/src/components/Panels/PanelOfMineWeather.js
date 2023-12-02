@@ -15,7 +15,7 @@ class PanelOfMineWeather extends React.Component {
   render() {
     return (
       <div className="Mine_panel">
-        <div className="Mine_panel box_input">
+        <div className="box_input">
           <InputCity
             enterCity={this.props.enterCity}
             searchCity={this.props.searchCity}
@@ -23,13 +23,14 @@ class PanelOfMineWeather extends React.Component {
           <FaSearchLocation
             onClick={this.props.searchCity}
             size={20}
-            className="Mine_Panel icon_search_city"
+            className="icon_search_city"
           />
           <FaRegCompass
             size={20}
             onClick={() => {
               this.props.searchCoordUser()
             }}
+            className="icon_search_coords"
           />
         </div>
         <IsLoadingOrErrorWrapper props={this.props} />

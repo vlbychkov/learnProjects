@@ -26,7 +26,6 @@ class DisplayTemp extends React.Component {
         <div>
           <div>
             <h1>{data.name}</h1>
-            <h3>Влажность: {data.main.humidity}%</h3>
             {/* сделать отдельно */}
             <p>{changeFirstLetter()}</p>
           </div>

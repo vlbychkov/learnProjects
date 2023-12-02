@@ -1,19 +1,27 @@
 .Mine_panel {
     padding-top: 2em;
+    border: 2px solid #eef0f23d;
+    margin-bottom: 4em;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
 }
 
 .Mine_panel input {
     background-color: none;
-    border-bottom: 1px solid #fcfcfc;
+    border-bottom: 1px solid #EEF0F2;
     border-top: none;
     border-left: none;
     border-right: none;
     background: none;
     outline: none;
     padding-bottom: 5px;
-    color: #fcfcfc;
+    color: #EEF0F2;
     margin-right: 1em;
-    width: 20em;
+    width: 22em;
+    font-size: 16px;
 }
 
 .Mine_panel .box_input {
@@ -22,6 +30,16 @@
 
 }
 
-.Mine_panel .icon_search_city {
+.Mine_panel .icon_search_city, .icon_search_coords  {
     margin-right: 0.5em;
+    cursor: pointer;
+    transition: .5s ease;
+    -webkit-transition: .5s ease;
+    -moz-transition: .5s ease;
+    -ms-transition: .5s ease;
+    -o-transition: .5s ease;
+}
+
+.Mine_panel .icon_search_city:hover, .icon_search_coords:hover {
+    scale: 2;
 }
